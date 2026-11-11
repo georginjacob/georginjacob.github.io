@@ -8,14 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #111111;
-  --ink-mid: #444444;
-  --ink-light: #777777;
-  --paper: #ffffff;
-  --paper-warm: #f0f7ff;
-  --rule: #e5e7eb;
-  --accent: #005daa;
-  --accent-light: #dbeafe;
+  --ink: #1c1c1c;
+  --ink-mid: #44403c;
+  --ink-light: #78716c;
+  --paper: #faf8f4;
+  --paper-warm: #f2ede4;
+  --rule: #e0dbd2;
+  --accent: #8b6914;
+  --accent-light: #fdf3d8;
   --radius: 2px;
   --max: 820px;
   color-scheme: light;
@@ -26,16 +26,16 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 
 /* Nav */
-nav{position:sticky;top:0;z-index:100;background:#005daa;border-bottom:none;padding:0 max(24px, calc(50% - var(--max)/2))}
+nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--rule);padding:0 max(24px, calc(50% - var(--max)/2))}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:52px}
-.nav-name{font-family:'EB Garamond',serif;font-size:17px;color:#ffffff;text-decoration:none;letter-spacing:.01em}
+.nav-name{font-family:'EB Garamond',serif;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:.01em}
 .nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{font-size:13px;font-weight:400;color:rgba(255,255,255,0.8);text-decoration:none;letter-spacing:.03em;transition:color .15s}
-.nav-links a:hover,.nav-links a.active{color:#ffffff}
-.hamburger{display:none;background:none;border:none;cursor:pointer;color:#ffffff;padding:4px}
-.mobile-menu{display:none;position:fixed;inset:52px 0 0;background:#005daa;z-index:99;padding:24px;border-top:1px solid rgba(255,255,255,0.2)}
+.nav-links a{font-size:13px;font-weight:400;color:var(--ink-mid);text-decoration:none;letter-spacing:.03em;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:4px}
+.mobile-menu{display:none;position:fixed;inset:52px 0 0;background:var(--paper);z-index:99;padding:24px;border-top:1px solid var(--rule)}
 .mobile-menu.open{display:flex;flex-direction:column;gap:20px}
-.mobile-menu a{font-size:17px;color:#ffffff;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.2)}
+.mobile-menu a{font-size:17px;color:var(--ink);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--rule)}
 
 /* Layout helpers */
 .container{max-width:var(--max);margin:0 auto;padding:0 24px}

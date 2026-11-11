@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Georgin Jacob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a18;
+  --ink-mid: #4a4a46;
+  --ink-light: #8a8a84;
+  --paper: #f8f7f4;
+  --paper-warm: #f1ede6;
+  --rule: #d8d4cc;
+  --accent: #2c5282;
+  --accent-light: #ebf0f8;
+  --radius: 2px;
+  --max: 820px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e8e6e0;
+    --ink-mid: #aaa89e;
+    --ink-light: #6a6860;
+    --paper: #18181a;
+    --paper-warm: #1e1d1c;
+    --rule: #2e2e2c;
+    --accent: #7eb3f0;
+    --accent-light: #1a2235;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--rule);padding:0 max(24px, calc(50% - var(--max)/2))}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:52px}
+.nav-name{font-family:'EB Garamond',serif;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:.01em}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;font-weight:400;color:var(--ink-mid);text-decoration:none;letter-spacing:.03em;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:4px}
+.mobile-menu{display:none;position:fixed;inset:52px 0 0;background:var(--paper);z-index:99;padding:24px;border-top:1px solid var(--rule)}
+.mobile-menu.open{display:flex;flex-direction:column;gap:20px}
+.mobile-menu a{font-size:17px;color:var(--ink);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--rule)}
+
+/* Layout helpers */
+.container{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+section+section{border-top:1px solid var(--rule)}
+
+/* Hero */
+.hero{padding:80px 0 72px;background:var(--paper-warm)}
+.hero-inner{display:grid;grid-template-columns:1fr 200px;gap:48px;align-items:start}
+.hero-tag{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:500;margin-bottom:14px;text-transform:uppercase}
+.hero h1{font-family:'EB Garamond',serif;font-size:clamp(32px,5vw,46px);font-weight:400;line-height:1.15;margin-bottom:16px}
+.hero-role{font-size:14px;color:var(--ink-mid);margin-bottom:28px;line-height:1.6}
+.hero-bio{font-size:15px;line-height:1.75;color:var(--ink-mid);max-width:560px}
+.hero-bio p+p{margin-top:14px}
+.hero-photo{display:flex;flex-direction:column;align-items:flex-end;gap:16px}
+.hero-photo img{width:160px;height:200px;object-fit:cover;object-position:top;border-radius:3px;filter:grayscale(15%)}
+.hero-photo .photo-placeholder{width:160px;height:200px;background:var(--rule);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--ink-light);font-size:12px}
+.social-links{display:flex;gap:12px}
+.social-links a{color:var(--ink-light);transition:color .15s;line-height:0}
+.social-links a:hover{color:var(--accent)}
+.social-links svg{width:18px;height:18px}
+
+/* Section headings */
+.section-label{font-size:11px;letter-spacing:.1em;color:var(--accent);font-weight:500;margin-bottom:24px;text-transform:uppercase}
+h2{font-family:'EB Garamond',serif;font-size:28px;font-weight:400;margin-bottom:28px}
+
+/* Experience timeline */
+.timeline{display:flex;flex-direction:column;gap:0}
+.timeline-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.timeline-item:last-child{border-bottom:none}
+.timeline-date{font-size:12px;color:var(--ink-light);padding-top:3px;line-height:1.5}
+.timeline-content h3{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.timeline-content p{font-size:14px;color:var(--ink-mid)}
+
+/* Education */
+.edu-grid{display:flex;flex-direction:column;gap:32px}
+.edu-item{display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:start;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.edu-item:last-child{border-bottom:none;padding-bottom:0}
+.edu-degree{font-size:15px;font-weight:500;margin-bottom:4px}
+.edu-inst{font-size:14px;color:var(--accent);margin-bottom:6px}
+.edu-meta{font-size:13px;color:var(--ink-mid);line-height:1.6}
+.edu-meta a{color:var(--accent);text-decoration:none}
+.edu-meta a:hover{text-decoration:underline}
+.edu-period{font-size:12px;color:var(--ink-light);padding-top:3px}
+
+/* Publications */
+.pub-section+.pub-section{margin-top:40px}
+.pub-section h3{font-family:'EB Garamond',serif;font-size:20px;font-weight:400;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.pub-list{display:flex;flex-direction:column;gap:14px;list-style:none}
+.pub-list li{font-size:14px;line-height:1.65;color:var(--ink-mid);padding-left:20px;position:relative}
+.pub-list li::before{content:counter(pub-counter);counter-increment:pub-counter;position:absolute;left:0;color:var(--ink-light);font-size:12px;top:3px}
+.pub-list{counter-reset:pub-counter}
+.pub-list a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;transition:text-decoration-color .15s}
+.pub-list a:hover{text-decoration-color:var(--accent)}
+.pub-author-bold{font-weight:500;color:var(--ink)}
+.pub-venue{font-style:italic}
+.pub-tag{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;margin-left:4px;font-style:normal;vertical-align:middle}
+
+/* Contact / footer */
+footer{background:var(--paper-warm);padding:48px 0;border-top:1px solid var(--rule)}
+.footer-inner{display:flex;justify-content:space-between;align-items:start;gap:40px;flex-wrap:wrap}
+.footer-contact h3{font-family:'EB Garamond',serif;font-size:22px;font-weight:400;margin-bottom:12px}
+.footer-contact p{font-size:14px;color:var(--ink-mid)}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:14px;color:var(--accent);text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+.footer-copy{font-size:12px;color:var(--ink-light);margin-top:32px;padding-top:24px;border-top:1px solid var(--rule)}
+
+@media(max-width:680px){
+  .hero-inner{grid-template-columns:1fr;gap:32px}
+  .hero-photo{align-items:flex-start;flex-direction:row;align-items:center}
+  .hero-photo img{width:100px;height:130px}
+  .timeline-item,.edu-item{grid-template-columns:1fr;gap:4px}
+  .timeline-date,.edu-period{padding-top:0;font-size:11px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  section{padding:48px 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner container">
+    <a href="#about" class="nav-name">Dr. Georgin Jacob</a>
+    <ul class="nav-links">
+      <li><a href="#about" class="active">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 5h14M3 10h14M3 15h14"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#education" onclick="closeMenu()">Education</a>
+  <a href="#publications" onclick="closeMenu()">Publications</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- Hero / About -->
+<section class="hero" id="about">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Lead Research Scientist · Carl Zeiss India</div>
+        <h1>Dr. Georgin Jacob</h1>
+        <div class="hero-role">
+          AI for Ophthalmology &nbsp;·&nbsp; Computational Neuroscience &nbsp;·&nbsp; Vision Science
+        </div>
+        <div class="hero-bio">
+          <p>I build next-generation AI technologies for ophthalmology, working in the Advanced Development team at Carl Zeiss India. My work centres on developing clinically meaningful algorithms for the early detection and management of glaucoma, in close collaboration with leading eye-care institutions.</p>
+          <p>I completed my Ph.D. in Neuroscience at the Indian Institute of Science (IISc), Bangalore, under the mentorship of Prof. S. P. Arun. Before entering neuroscience, I trained as an engineer — earning a Bachelor's in Electronics and Communication Engineering and a Master's in Signal Processing.</p>
+          <p>My passion lies in understanding how the brain solves the incredibly complex problem of vision. I am driven by the belief that integrating insights from neuroscience with advances in artificial intelligence can deepen our understanding of both biological and artificial intelligence — and ultimately lead to transformative technologies in healthcare.</p>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="https://sites.google.com/view/georginjacob/about-me" alt="Dr. Georgin Jacob"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-placeholder" style="display:none">Photo</div>
+        <div class="social-links">
+          <a href="mailto:georginjacob@gmail.com" title="Email" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          </a>
+          <a href="https://scholar.google.com" target="_blank" title="Google Scholar" aria-label="Google Scholar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M2 8v8"/><path d="M7 10.5v5a5 5 0 0010 0v-5"/></svg>
+          </a>
+          <a href="https://twitter.com" target="_blank" title="Twitter" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="https://github.com" target="_blank" title="GitHub" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career</div>
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2026 — present</div>
+        <div class="timeline-content">
+          <h3>Lead Research Scientist</h3>
+          <p>Carl Zeiss India</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">May 2025 — present</div>
+        <div class="timeline-content">
+          <h3>Expert Ladder: Senior at MED</h3>
+          <p>ZEISS (Global)</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2022 — Mar 2022</div>
+        <div class="timeline-content">
+          <h3>Research Engineer</h3>
+          <p>Carl Zeiss India</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Mar 2022 — Aug 2022</div>
+        <div class="timeline-content">
+          <h3>Post-doctoral Researcher</h3>
+          <p>Vision Lab, Centre for Neuroscience, IISc Bangalore, India</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2021 — Mar 2022</div>
+        <div class="timeline-content">
+          <h3>Research Scholar</h3>
+          <p>Vision Lab, IISc</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Mar 2014 — Jul 2015</div>
+        <div class="timeline-content">
+          <h3>Junior Research Fellow</h3>
+          <p>Signal Processing Systems Division, NPOL, DRDO, India</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2012 — Mar 2014</div>
+        <div class="timeline-content">
+          <h3>Lecturer</h3>
+          <p>Saintgits College of Engineering, Kottayam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Academic background</div>
+    <h2>Education</h2>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="edu-period">Aug 2015 – Jul 2021</div>
+        <div>
+          <div class="edu-degree">Ph.D. in Neuroscience</div>
+          <div class="edu-inst">Indian Institute of Science (IISc), Bengaluru, India</div>
+          <div class="edu-meta">
+            Department: Electrical Communication Engineering<br>
+            Supervisor: <a href="#">Prof. S. P. Arun</a><br>
+            Thesis: <a href="#">How are visual object representations organized and used to perform tasks?</a>
+          </div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-period">Aug 2010 – Jul 2012</div>
+        <div>
+          <div class="edu-degree">M.Tech in Signal Processing</div>
+          <div class="edu-inst">College of Engineering Trivandrum, Thiruvananthapuram, Kerala</div>
+          <div class="edu-meta">
+            Department: Electronics and Communication Engineering<br>
+            Supervisor: <a href="#">Prof. Jiji C.V.</a>
+          </div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-period">Aug 2006 – Jul 2010</div>
+        <div>
+          <div class="edu-degree">B.Tech in Electronics and Communication Engineering</div>
+          <div class="edu-inst">Rajiv Gandhi Institute of Technology, Kottayam, Kerala</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Publications -->
+<section id="publications">
+  <div class="container">
+    <div class="section-label">Research output</div>
+    <h2>Publications</h2>
+
+    <div class="pub-section">
+      <h3>Preprints</h3>
+      <ol class="pub-list">
+        <li>Simon, S., Munda, S., Cherian, T., Saha, S., <span class="pub-author-bold">Jacob, G.</span>, Das, J., Bhadra, D., &amp; Arun, S. P. (2026). <a href="#">Resolving the treachery of images: Neural signatures during natural interactions with real objects are as reliable as while viewing images</a>. bioRxiv, 2026-04.</li>
+        <li>Saha S, Simon S, Munda S, Cherian T, <span class="pub-author-bold">Jacob G</span>, Das J, Bhadra D &amp; Arun SP (2026). <a href="#">High-level visual and motor regions are doubly dissociated in controlled tasks but only at specific times during natural behaviors</a> (bioRxiv), 2026.</li>
+        <li>Joby, J., Sirmon, S., Cherian, <span class="pub-author-bold">Jacob, G.</span>, Das, J., Munda, S., Saha, S., Bhadra, D., &amp; Arun, S. P. (2026). Do monkeys dream about food while sleeping? bioRxiv, 2026-09.</li>
+        <li>Rajesh N., <span class="pub-author-bold">Jacob G.</span>, &amp; Arun S. P. (2024). <a href="#">Brain like emergent properties in deep networks: impact of network architecture, datasets and training</a> (arXiv).</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Journals</h3>
+      <ol class="pub-list">
+        <li>Cherian, T., <span class="pub-author-bold">Jacob, G.</span>, &amp; Arun, S. P. (2026). <a href="#">Do monkeys see the way we do? Qualitative similarities and differences between monkey and human perception</a>. <span class="pub-venue">eLife</span>, 15, c110743.</li>
+        <li><span class="pub-author-bold">Jacob, G.</span>, Pramod, R. T., &amp; Arun, S. P. (2025). <a href="#">Visual homogeneity computations in the brain enable solving generic visual tasks</a>. <span class="pub-venue">eLife</span>, <span class="pub-venue">13</span>, RP93033. <span class="pub-tag">Media: Times of India</span></li>
+        <li><span class="pub-author-bold">Jacob, G.</span>, Katti, H., Cherian, T., Das, J., Zhivago, K. A., &amp; Arun, S. P. (2021). <a href="#">A naturalistic environment to study visual cognition in unrestrained monkeys</a>. <span class="pub-venue">eLife</span>, <span class="pub-venue">10</span>, c63816. <span class="pub-tag">Media: Times of India · Bangalore Mirror</span></li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Conferences</h3>
+      <ol class="pub-list">
+        <li><span class="pub-author-bold">Jacob, G.</span>, Lee, G. C., Salehi, A., Prasad, R., Chitralekha, S. D., &amp; George, R. J. (2025). <a href="#">Transformer-based forecasting of future glaucomatous visual fields</a>. <span class="pub-venue">Investigative Ophthalmology &amp; Visual Science</span>, 66(8), 402-402.</li>
+        <li>George, R. J., <span class="pub-author-bold">Jacob, G.</span>, Chitralekha, S. D., Prasad, R., Lee, G. C., &amp; Mani, B. (2025). <a href="#">Changes in visual field reliability indices over serial visual fields in a large patient cohort</a>. <span class="pub-venue">Investigative Ophthalmology &amp; Visual Science</span>, 66(8), 5721.</li>
+        <li>Choudhry, R. M., <span class="pub-author-bold">Jacob, G.</span>, Lee, G. C., Prasad, R., &amp; Pal, T. (2025). <a href="#">Patterns of glaucomatous visual field deterioration in an Indian population</a>. <span class="pub-venue">Investigative Ophthalmology &amp; Visual Science</span>, 66(8), 5739.</li>
+        <li><span class="pub-author-bold">Jacob, G.</span>, Prasad, R., Lee, G. C., Opoku-Baah, C., &amp; George, R. (2024). <a href="#">A consensus approach to train deep learning models to predict glaucoma progression from visual field data</a>. <span class="pub-venue">Investigative Ophthalmology &amp; Visual Science</span>, 65(7), 4800-4801.</li>
+        <li>Opoku-Baah, C., Lee, G. C., <span class="pub-author-bold">Jacob, G.</span>, Medeiros, F., Jammal, A., &amp; Manivannan, N. (2024). <a href="#">Leveraging archetypal analysis for classifying glaucomatous visual field defects</a>. <span class="pub-venue">Investigative Ophthalmology &amp; Visual Science</span>, 65(7), 1637-1637.</li>
+        <li>George, R., <span class="pub-author-bold">Jacob, G.</span>, &amp; Prasad, R. (2024). <a href="#">Rates of glaucomatous visual field progression in a large Indian cohort</a>. <span class="pub-venue">Investigative Ophthalmology &amp; Visual Science</span>, 65(7), 4798-4798.</li>
+        <li><span class="pub-author-bold">Jacob, G.</span>, Arun, S. P. (2022). <a href="#">Visual search asymmetries are explained by visual homogeneity. VSS 2022</a>. (Talk)</li>
+        <li><span class="pub-author-bold">Jacob, G.</span>, Arun, S. P. (2021). Evidence of distinctiveness computations in human brain revealed by target-absent searches. V-VSS 2021. (Poster)</li>
+        <li><span class="pub-author-bold">Jacob, G.</span>, Gulati, D., Pramod, R. T., &amp; Arun, S. P. (2020). Why are target absent searches so systematic?. <span class="pub-venue">Journal of Vision</span>, 20(11), 1742-1742. (Talk)</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Contact / Footer -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-contact">
+        <h3>Get in touch</h3>
+        <p style="color:var(--ink-mid);font-size:14px;max-width:360px;line-height:1.7">I'm always happy to discuss research, potential collaborations, or opportunities at the intersection of AI and clinical ophthalmology.</p>
+        <div style="margin-top:16px">
+          <a href="mailto:georginjacob@gmail.com" style="font-size:14px;color:var(--accent);text-decoration:none">georginjacob@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--ink-light);margin-bottom:12px;letter-spacing:.06em;text-transform:uppercase">Links</div>
+        <div class="footer-links">
+          <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
+          <a href="https://twitter.com" target="_blank">Twitter / X</a>
+          <a href="https://github.com" target="_blank">GitHub</a>
+          <a href="https://sites.google.com/view/georginjacob/" target="_blank">Original site</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2026 Dr. Georgin Jacob · Lead Research Scientist, Carl Zeiss India
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
+
+const sections=document.querySelectorAll('section[id],footer[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)
+      })
+    }
+  })
+},{rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

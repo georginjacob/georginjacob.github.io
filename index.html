@@ -18,20 +18,9 @@
   --accent-light: #dbeafe;
   --radius: 2px;
   --max: 820px;
-  color-scheme: light dark;
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ink: #f1f5f9;
-    --ink-mid: #94a3b8;
-    --ink-light: #64748b;
-    --paper: #0f172a;
-    --paper-warm: #1e293b;
-    --rule: #1e3a5f;
-    --accent: #38bdf8;
-    --accent-light: #0c2d5a;
-  }
-}
+/* Light mode forced — dark mode disabled */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
